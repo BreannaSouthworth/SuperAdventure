@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\Engine\\Engine.csproj": {}
+    "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\SuperAdventure\\Engine\\Engine.csproj": {}
   },
   "projects": {
-    "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\Engine\\Engine.csproj": {
+    "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\SuperAdventure\\Engine\\Engine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\Engine\\Engine.csproj",
+        "projectUniqueName": "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\SuperAdventure\\Engine\\Engine.csproj",
         "projectName": "Engine",
-        "projectPath": "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\Engine\\Engine.csproj",
+        "projectPath": "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\SuperAdventure\\Engine\\Engine.csproj",
         "packagesPath": "C:\\Users\\paisl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\Engine\\obj\\",
+        "outputPath": "C:\\Users\\paisl\\source\\repos\\SuperAdventure\\SuperAdventure\\Engine\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\paisl\\AppData\\Roaming\\NuGet\\NuGet.Config",
