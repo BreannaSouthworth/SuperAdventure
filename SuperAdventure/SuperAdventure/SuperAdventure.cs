@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 using Engine;
 
@@ -14,6 +15,8 @@ namespace SuperAdventure
 {
     public partial class SuperAdventure : Form
     {
+        private const string PLAYER_DATA_FILE_NAME = "PlayerData.xml";
+
         private Player _player;
         private Monster _currentMonster;
 
@@ -21,9 +24,18 @@ namespace SuperAdventure
         {
             InitializeComponent();
 
-            _player = new Player(10, 10, 20, 0, 1);
-            MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
-            _player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));
+            if (File.Exists(PLAYER_DATA_FILE_NAME))
+            {
+                _player = Player.CreatePlayerFromXmlString(File.ReadAllText(PLAYER_DATA_FILE_NAME));
+            }
+            else
+            {
+                _player = Player.CreateDefaultPlayer();
+            }
+
+            MoveTo(_player.CurrentLocation);
+
+            UpdatePlayerStats();
 
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
             lblGold.Text = _player.Gold.ToString();
@@ -213,6 +225,9 @@ namespace SuperAdventure
                 dgvQuests.Rows.Add(new[] { playerQuest.Details.Name, playerQuest.IsCompleted.ToString() });
             }
 
+            // Refresh player's stats
+            UpdatePlayerStats();
+
             // Refresh player's inventory list
             UpdateInventoryListInUI();
 
@@ -224,16 +239,30 @@ namespace SuperAdventure
 
             // Refresh player's potions combobox
             UpdatePotionListInUI();
+
+            ScrollToBottomOfMessages();
+        }
+
+        private void UpdatePlayerStats()
+        {
+            // Refresh player information and inventory controls
+            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
+            lblGold.Text = _player.Gold.ToString();
+            lblExperience.Text = _player.ExperiencePoints.ToString();
+            lblLevel.Text = _player.Level.ToString();
         }
 
         private void UpdateInventoryListInUI()
         {
             dgvInventory.RowHeadersVisible = false;
+
             dgvInventory.ColumnCount = 2;
             dgvInventory.Columns[0].Name = "Name";
             dgvInventory.Columns[0].Width = 197;
             dgvInventory.Columns[1].Name = "Quantity";
+            
             dgvInventory.Rows.Clear();
+            
             foreach (InventoryItem inventoryItem in _player.Inventory)
             {
                 if (inventoryItem.Quantity > 0)
@@ -246,11 +275,14 @@ namespace SuperAdventure
         private void UpdateQuestListInUI()
         {
             dgvQuests.RowHeadersVisible = false;
+            
             dgvQuests.ColumnCount = 2;
             dgvQuests.Columns[0].Name = "Name";
             dgvQuests.Columns[0].Width = 197;
             dgvQuests.Columns[1].Name = "Done?";
+            
             dgvQuests.Rows.Clear();
+            
             foreach (PlayerQuest playerQuest in _player.Quests)
             {
                 dgvQuests.Rows.Add(new[] { playerQuest.Details.Name, playerQuest.IsCompleted.ToString() });
@@ -260,6 +292,7 @@ namespace SuperAdventure
         private void UpdateWeaponListInUI()
         {
             List<Weapon> weapons = new List<Weapon>();
+            
             foreach (InventoryItem inventoryItem in _player.Inventory)
             {
                 if (inventoryItem.Details is Weapon)
@@ -270,6 +303,7 @@ namespace SuperAdventure
                     }
                 }
             }
+            
             if (weapons.Count == 0)
             {
                 // The player doesn't have any weapons, so hide the weapon combobox and "Use" button
@@ -281,6 +315,7 @@ namespace SuperAdventure
                 cboWeapons.DataSource = weapons;
                 cboWeapons.DisplayMember = "Name";
                 cboWeapons.ValueMember = "ID";
+
                 cboWeapons.SelectedIndex = 0;
             }
         }
@@ -288,6 +323,7 @@ namespace SuperAdventure
         private void UpdatePotionListInUI()
         {
             List<HealingPotion> healingPotions = new List<HealingPotion>();
+            
             foreach (InventoryItem inventoryItem in _player.Inventory)
             {
                 if (inventoryItem.Details is HealingPotion)
@@ -298,6 +334,7 @@ namespace SuperAdventure
                     }
                 }
             }
+            
             if (healingPotions.Count == 0)
             {
                 // The player doesn't have any potions, so hide the potion combobox and "Use" button
@@ -309,6 +346,7 @@ namespace SuperAdventure
                 cboPotions.DataSource = healingPotions;
                 cboPotions.DisplayMember = "Name";
                 cboPotions.ValueMember = "ID";
+
                 cboPotions.SelectedIndex = 0;
             }
         }
@@ -473,6 +511,17 @@ namespace SuperAdventure
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
             UpdateInventoryListInUI();
             UpdatePotionListInUI();
+        }
+
+        private void ScrollToBottomOfMessages()
+        {
+            rtbMessages.SelectionStart = rtbMessages.Text.Length;
+            rtbMessages.ScrollToCaret();
+        }
+
+        private void SuperAdventure_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            File.WriteAllText(PLAYER_DATA_FILE_NAME, _player.ToXmlString());
         }
     }
 }

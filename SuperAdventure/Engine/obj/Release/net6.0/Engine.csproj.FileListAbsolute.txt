@@ -1,0 +1,12 @@
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\bin\Release\net6.0\Engine.deps.json
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\bin\Release\net6.0\Engine.dll
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\bin\Release\net6.0\Engine.pdb
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\obj\Release\net6.0\Engine.csproj.AssemblyReference.cache
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\obj\Release\net6.0\Engine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\obj\Release\net6.0\Engine.AssemblyInfoInputs.cache
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\obj\Release\net6.0\Engine.AssemblyInfo.cs
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\obj\Release\net6.0\Engine.csproj.CoreCompileInputs.cache
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\obj\Release\net6.0\Engine.dll
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\obj\Release\net6.0\refint\Engine.dll
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\obj\Release\net6.0\Engine.pdb
+C:\Users\paisl\source\repos\SuperAdventure\SuperAdventure\Engine\obj\Release\net6.0\ref\Engine.dll
